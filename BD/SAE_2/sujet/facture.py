@@ -31,13 +31,13 @@ def faire_factures(requete:str, mois:int, annee:int, bd:MySQL):
     # et le deuxième ? par l'année
     curseur=bd.execute(requete,(mois,annee))
     # Initialisations du traitement
-    res='pas encore implémentée'
+    res=''
     for ligne in curseur:
         # parcours du résultat de la requête. 
         # ligne peut être vu comme un dictionnaire dont les clés sont les noms des colonnes de votre requête
         # est les valeurs sont les valeurs de ces colonnes pour la ligne courante
         # par exemple ligne['numcom'] va donner le numéro de la commande de la ligne courante 
-        ...
+        for magasin
 
     #ici fin du traitement
     # fermeture de la requête

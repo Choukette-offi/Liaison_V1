@@ -32,14 +32,13 @@ def faire_factures(requete:str, mois:int, annee:int, bd:MySQL):
     curseur=bd.execute(requete,(mois,annee))
     # Initialisations du traitement
     res=''
-    fact_cli = dict()
+    
     for ligne in curseur:
         # parcours du résultat de la requête. 
         # ligne peut être vu comme un dictionnaire dont les clés sont les noms des colonnes de votre requête
         # est les valeurs sont les valeurs de ces colonnes pour la ligne courante
         # par exemple ligne['numcom'] va donner le numéro de la commande de la ligne courante 
-        if ligne["nom"] + ' ' + ligne["prenom"] not in fact_cli.keys():
-            fact_cli[ligne["nom"] + ' ' + ligne["prenom"]] = ligne['nom'] + ' ' + ligne["prénom"] + '\n' + ligne['adresse'] + '\n' + ligne["codepostal"] + ' ' + ligne["ville"] 
+        ...
         
 
     #ici fin du traitement

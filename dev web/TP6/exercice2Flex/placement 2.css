@@ -1,0 +1,30 @@
+body{
+    display: flex;
+    flex-wrap: wrap;
+}
+header, footer{
+    flex-basis: 100%;
+    height: 25vh;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+
+section{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-grow: 1;
+}
+
+aside, nav, article{
+    height: 47vh;
+    margin: 2px;
+}
+
+article{
+    flex-basis: 69%;
+}
+
+nav, aside{
+    flex-basis: 20%;
+}

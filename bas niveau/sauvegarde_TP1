@@ -1,0 +1,127 @@
+.main
+BIPUSH 27
+BIPUSH 127
+BIPUSH -128
+BIPUSH -1
+.end-main
+
+exo 5
+.main
+BIPUSH 3
+BIPUSH -4
+IADD
+BIPUSH 2
+IADD
+DUP
+IADD
+BIPUSH 5
+IADD
+BIPUSH 8
+ISUB
+.end-main
+
+exo 8
+.main
+.var
+i
+j
+k
+l
+m
+n
+o
+p
+.end-var
+BIPUSH 1
+ISTORE i
+BIPUSH 2
+ISTORE j
+BIPUSH 3
+ISTORE k
+BIPUSH 4
+ISTORE l
+BIPUSH 5
+ISTORE m
+BIPUSH 6
+ISTORE n
+BIPUSH 7
+ISTORE o
+BIPUSH 8
+ISTORE p
+.end-main
+
+exo 9
+.main
+.var
+i
+j
+.end-var
+BIPUSH 1
+ISTORE i
+BIPUSH 2
+ISTORE j
+ILOAD i
+ILOAD j
+ISTORE i
+ISTORE j
+.end-main
+
+EXo 10 /e 
+.constant
+X 1023
+A 1024
+Z -1024
+.end-constant
+.main
+.var
+a
+z
+e
+.end-var
+LDCW X
+ISTORE a
+LDCW A
+ISTORE z
+LDCW Z
+ISTORE e
+.end-main
+
+/f
+.constant
+X  1000000000
+.end-constant
+.main
+.var
+x
+y
+z
+.end-var
+LDCW X
+LDCW X
+IADD
+.end-main
+
+exo 11 /a
+.main
+.var
+i
+.end-var
+BIPUSH 1
+ISTORE i
+ILOAD i
+BIPUSH 12
+IADD
+ISTORE i
+.end-main
+
+/b
+.main
+.var
+i
+.end-var
+BIPUSH 1
+ISTORE i
+IINC i 12
+.end-main
+
+/c non

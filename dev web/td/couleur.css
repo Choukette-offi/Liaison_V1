@@ -1,0 +1,28 @@
+h1{
+    background-color: cadetblue;
+}
+
+header{
+    background-color: antiquewhite;
+}
+
+section{
+    background-color: antiquewhite;
+}
+
+aside{
+    background-color: antiquewhite;
+}
+
+footer{
+    background-color: antiquewhite;
+}
+
+p{
+    background-color: lightgreen;
+}
+
+h1, header, aside, section, footer, p{
+    border: solid;
+    margin: 5px;
+}

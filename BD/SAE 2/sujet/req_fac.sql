@@ -1,0 +1,1 @@
+select nomcli from CLIENT

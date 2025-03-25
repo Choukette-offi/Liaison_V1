@@ -73,13 +73,16 @@ def faire_factures(requete:str, mois:int, annee:int, bd:MySQL):
         
         else:
             res += '\n' + '-'*80 + '\n' + str(cpt_cmd) +' factures éditées' + '\n' + str(qte_lv) + ' livres vendus' + '\n' + '*'*80
-            res += '\n' + '  ' + str(cpt_cmd) + ' ' + ligne["ISBN"] + ' ' + ligne["Titre"] + ' '*(44-len(ligne["Titre"])) + str(ligne['qte']) + '  '*(5-len(str(ligne["Prix"]))) + str(ligne["Prix"]) + ' '*4 + str(ligne["Total"]) + '\n'
-            cpt_cmd += 1
+            cpt_cmd = 1
             gro_tot += pt_tot
             nb_lv += qte_lv 
             qte_lv = ligne["qte"]
             mag_prec = ligne["nommag"]
             pt_tot = ligne["Total"]
+            res +=  '\n' + "Factures du " + '...' + '\n' + 'Edition des factures du magasin ' + ligne["nommag"] + '\n' + '-' * 80 
+            res += '\n' + ligne["prenomCli"] + ' ' + ligne["nomCli"] + '\n' + ligne["adressecli"] + '\n' + str(ligne["codepostal"]) + ' ' + ligne['Ville'] + '\n' + ' '*26 + 'commande n°' + str(ligne['Numero De Commande']) + ' du ' + str(ligne['Date de Commande']) + '\n' + ' '*8 + 'ISBN' + ' '*24 + 'Titre' + ' '*19 + 'qte' + ' '*3 + 'prix' + ' '*4 + 'total' + '\n'
+            res += '  ' + str(cpt_cmd) + ' ' + ligne["ISBN"] + ' ' + ligne["Titre"] + ' '*(44-len(ligne["Titre"])) + str(ligne['qte']) + '  ' + str(ligne["Prix"]) + ' '*4 + str(ligne["Total"]) + '\n'
+            cpt_cmd += 1
     #ici fin du traitement
     # fermeture de la requête
     curseur.close()

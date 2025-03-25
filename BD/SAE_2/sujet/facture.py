@@ -48,18 +48,22 @@ def faire_factures(requete:str, mois:int, annee:int, bd:MySQL):
             titre = ligne["Titre"][:38] + '...'
         else : 
             titre = ligne["Titre"]
+        if len(str(ligne["Prix"])) < 5:
+            prix = '  ' + str(ligne["Prix"])
+        else:
+            prix = str(ligne["Prix"])
         if save == '':
             cpt_cmd += 1
             res += "Factures du " + str(mois) + '/' + str(annee) + '\n' + 'Edition des factures du magasin ' + ligne["nommag"] + '\n' + '-' * 80 
             res += '\n' + ligne["prenomCli"] + ' ' + ligne["nomCli"] + '\n' + ligne["adressecli"] + '\n' + str(ligne["codepostal"]) + ' ' + ligne['Ville'] + '\n' + ' '*26 + 'commande n°' + str(ligne['Numero De Commande']) + ' du ' + str(ligne['Date de Commande']) + '\n' + ' '*8 + 'ISBN' + ' '*24 + 'Titre' + ' '*19 + 'qte' + ' '*3 + 'prix' + ' '*4 + 'total' + '\n'
-            res += '  ' + str(cpt_cmd) + ' ' + ligne["ISBN"] + ' ' + titre + ' '*(44-len(titre)) + str(ligne['qte']) + '  ' + str(ligne["Prix"]) + ' '*4 + str(ligne["Total"]) + '\n'
+            res += '  ' + str(cpt_cmd) + ' ' + ligne["ISBN"] + ' ' + titre + ' '*(44-len(titre)) + str(ligne['qte']) + ' '*2 + prix + ' '*4 + str(ligne["Total"]) + '\n'
             qte_lv += ligne["qte"]
             save = ligne
             pt_tot += ligne["Total"]
 
         elif ligne["prenomCli"] + ligne["nomCli"] == save["prenomCli"] + save["nomCli"] and ligne["nommag"] == save["nommag"] :
             cpt_cmd += 1
-            res += '  ' + str(cpt_cmd) + ' ' + ligne["ISBN"] + ' ' + titre + ' '*(44-len(titre)) + str(ligne['qte']) + '  '*(10-len(str(ligne["Prix"]))) + str(ligne["Prix"]) + ' '*4 + str(ligne["Total"]) + '\n'
+            res += '  ' + str(cpt_cmd) + ' ' + ligne["ISBN"] + ' ' + titre + ' '*(44-len(titre)) + str(ligne['qte']) + ' '*2 + prix + ' '*4 + str(ligne["Total"]) + '\n'
             qte_lv += ligne["qte"]
             pt_tot += ligne["Total"]
             save = ligne
@@ -69,7 +73,7 @@ def faire_factures(requete:str, mois:int, annee:int, bd:MySQL):
             cpt_cmd += 1 
             res += ' '*71 + '-'*8 + '\n' + ' '*65 + 'Total' + ' '*(9-len(str(pt_tot))) + str(pt_tot) + '\n' + '-'*80
             res += '\n' + ligne["prenomCli"] + ' ' + ligne["nomCli"] + '\n' + ligne["adressecli"] + '\n' + str(ligne["codepostal"]) + ' ' + ligne['Ville'] + '\n' + ' '*26 + 'commande n°' + str(ligne['Numero De Commande']) + ' du ' + str(ligne['Date de Commande']) + '\n' + ' '*8 + 'ISBN' + ' '*24 + 'Titre' + ' '*19 + 'qte' + ' '*3 + 'prix' + ' '*4 + 'total' + '\n'
-            res += '  ' + str(cpt_cmd) + ' ' + ligne["ISBN"] + ' ' + titre + ' '*(44-len(titre)) + str(ligne['qte']) + '  ' + str(ligne["Prix"])  + ' '*(9-len(str(ligne["Prix"]))) + str(ligne["Total"]) + '\n'
+            res += '  ' + str(cpt_cmd) + ' ' + ligne["ISBN"] + ' ' + titre + ' '*(44-len(titre)) + str(ligne['qte']) + '  ' + str(ligne["Prix"])  + ' '*(9-len(str(ligne["Prix"]))) + prix + '\n'
             qte_lv += ligne["qte"]
             save = ligne
             pt_tot += ligne["Total"]

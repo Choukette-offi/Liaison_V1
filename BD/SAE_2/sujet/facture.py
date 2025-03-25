@@ -31,19 +31,59 @@ def faire_factures(requete:str, mois:int, annee:int, bd:MySQL):
     # et le deuxième ? par l'année
     curseur=bd.execute(requete,(mois,annee))
     # Initialisations du traitement
-    res=''
-    
+    print(curseur)
+    res = '' 
+    cpt_cmd = 1
+    id_pers = ''
+    mag_prec = ''
+    pt_tot = 0 
+    qte_lv = 0
+    gro_tot = 0
+    nb_lv = 0
     for ligne in curseur:
         # parcours du résultat de la requête. 
         # ligne peut être vu comme un dictionnaire dont les clés sont les noms des colonnes de votre requête
         # est les valeurs sont les valeurs de ces colonnes pour la ligne courante
         # par exemple ligne['numcom'] va donner le numéro de la commande de la ligne courante 
-        ...
-        
+        if mag_prec == '':
+            res += "Factures du " + str(mois) + '/' + str(annee) + '\n' + 'Edition des factures du magasin ' + ligne["nommag"] + '\n' + '-' * 80 
+            res += '\n' + ligne["prenomCli"] + ' ' + ligne["nomCli"] + '\n' + ligne["adressecli"] + '\n' + str(ligne["codepostal"]) + ' ' + ligne['Ville'] + '\n' + ' '*26 + 'commande n°' + str(ligne['Numero De Commande']) + ' du ' + str(ligne['Date de Commande']) + '\n' + ' '*8 + 'ISBN' + ' '*24 + 'Titre' + ' '*19 + 'qte' + ' '*3 + 'prix' + ' '*4 + 'total' + '\n'
+            res += '  ' + str(cpt_cmd) + ' ' + ligne["ISBN"] + ' ' + ligne["Titre"] + ' '*(44-len(ligne["Titre"])) + str(ligne['qte']) + '  ' + str(ligne["Prix"]) + ' '*4 + str(ligne["Total"]) + '\n'
+            cpt_cmd += 1
+            qte_lv += ligne["qte"]
+            mag_prec = ligne["nommag"]
+            id_pers = ligne["prenomCli"] + ligne["nomCli"]
+            pt_tot += ligne["Total"]
 
+        elif ligne["prenomCli"] + ligne["nomCli"] == id_pers and ligne["nommag"] == mag_prec :
+            res += '  ' + str(cpt_cmd) + ' ' + ligne["ISBN"] + ' ' + ligne["Titre"] + ' '*(44-len(ligne["Titre"])) + str(ligne['qte']) + '  '*(5-len(str(ligne["Prix"]))) + str(ligne["Prix"]) + ' '*4 + str(ligne["Total"]) + '\n'
+            cpt_cmd += 1
+            qte_lv += ligne["qte"]
+            mag_prec = ligne["nommag"]
+            pt_tot += ligne["Total"]
+
+        elif ligne["nommag"] == mag_prec:
+            res += ' '*71 + '-'*8 + '\n' + ' '*65 + 'Total' + ' '*(9-len(str(pt_tot))) + str(pt_tot) + '\n' + '-'*80
+            res += '\n' + ligne["prenomCli"] + ' ' + ligne["nomCli"] + '\n' + ligne["adressecli"] + '\n' + str(ligne["codepostal"]) + ' ' + ligne['Ville'] + '\n' + ' '*26 + 'commande n°' + str(ligne['Numero De Commande']) + ' du ' + str(ligne['Date de Commande']) + '\n' + ' '*8 + 'ISBN' + ' '*24 + 'Titre' + ' '*19 + 'qte' + ' '*3 + 'prix' + ' '*4 + 'total' + '\n'
+            res += '  ' + str(cpt_cmd) + ' ' + ligne["ISBN"] + ' ' + ligne["Titre"] + ' '*(44-len(ligne["Titre"])) + str(ligne['qte']) + '  ' + str(ligne["Prix"])  + ' '*(9-len(str(ligne["Prix"]))) + str(ligne["Total"]) + '\n'
+            cpt_cmd +=1
+            qte_lv += ligne["qte"]
+            mag_prec = ligne["nommag"]
+            pt_tot += ligne["Total"]
+        
+        else:
+            res += '\n' + '-'*80 + '\n' + str(cpt_cmd) +' factures éditées' + '\n' + str(qte_lv) + ' livres vendus' + '\n' + '*'*80
+            res += '\n' + '  ' + str(cpt_cmd) + ' ' + ligne["ISBN"] + ' ' + ligne["Titre"] + ' '*(44-len(ligne["Titre"])) + str(ligne['qte']) + '  '*(5-len(str(ligne["Prix"]))) + str(ligne["Prix"]) + ' '*4 + str(ligne["Total"]) + '\n'
+            cpt_cmd += 1
+            gro_tot += pt_tot
+            nb_lv += qte_lv 
+            qte_lv = ligne["qte"]
+            mag_prec = ligne["nommag"]
+            pt_tot = ligne["Total"]
     #ici fin du traitement
     # fermeture de la requête
     curseur.close()
+    print(res)
     return res
         
 

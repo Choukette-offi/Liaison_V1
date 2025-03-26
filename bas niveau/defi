@@ -1,0 +1,9 @@
+L1:MDR = MAR = OPC;wr
+OPC=OPC-1
+Z = OPC; if(Z) goto L1; else goto END
+END: H=1
+
+
+
+prendre le resultat de 0X7
+le mettre dans mdr

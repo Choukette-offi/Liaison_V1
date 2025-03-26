@@ -1,7 +1,7 @@
 import sqlalchemy
 import argparse
 import getpass
-
+import pymysql
 class MySQL(object):
     def __init__(self, user, passwd, host, database,timeout=20):
         self.user = user

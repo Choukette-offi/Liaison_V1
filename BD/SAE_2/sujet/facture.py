@@ -81,7 +81,8 @@ def faire_factures(requete:str, mois:int, annee:int, bd:MySQL):
         elif ligne["nommag"] != save["nommag"]:
             cpt_cmd = 0
             cpt_cmd += 1
-            res += '\n' + '-'*80 + '\n' + str(cpt_cmd) +' factures éditées' + '\n' + str(qte_lv) + ' livres vendus' + '\n' + '*'*80
+            res += ' '*71 + '-'*8 + '\n' + ' '*65 + 'Total' + ' '*(9-len(str(pt_tot))) + str(pt_tot) + '\n' + '-'*80
+            res += '\n' + str(cpt_cmd) +' factures éditées' + '\n' + str(qte_lv) + ' livres vendus' + '\n' + '*'*80
             gro_tot += pt_tot
             nb_lv += qte_lv 
             qte_lv = ligne["qte"]

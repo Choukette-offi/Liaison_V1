@@ -1,4 +1,4 @@
-public class Animal {
+public abstract class Animal {
     private String nom;
     private double poids;
     private Enclos enclos;
@@ -42,4 +42,6 @@ public class Animal {
         
         return this.nom + " pese " + this.poids + " kg";
     }
+
+    public abstract String crier();
 }

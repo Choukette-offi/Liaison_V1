@@ -16,4 +16,8 @@ public class Lion extends Animal {
             return "\n" + "Lion " + super.toString() + " sans crinière" + "\n";
         }
     }
+    public String crier(){
+        return "RHOOOOOOOOOOOOOUUUUUU !!!!";
+    }
+
 }

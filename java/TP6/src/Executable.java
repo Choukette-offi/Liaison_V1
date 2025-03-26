@@ -8,5 +8,8 @@ public class Executable {
         Beauval.ajouteAnimal(Mufasa);
         Beauval.ajouteAnimal(Kaa);
         System.out.println(Beauval.toString());
+        System.out.println(Simba.crier());
+        System.out.println(Mufasa.crier());
+        System.out.println(Kaa.crier());
     }
 }

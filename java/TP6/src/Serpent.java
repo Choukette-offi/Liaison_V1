@@ -16,4 +16,9 @@ public class Serpent extends Animal {
             return "\n" + "Serpent " + super.toString() + " non venimeux" + "\n";
         }
     }
+    
+    public String crier(){
+        return "SSSSSSSSSsssssssssss!!!!";
+    }
+
 }

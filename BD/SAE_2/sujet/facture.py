@@ -35,6 +35,7 @@ def faire_factures(requete:str, mois:int, annee:int, bd:MySQL):
     cpt_cmd = 0
     save = ''
     pt_tot = 0 
+    fact = 0
     qte_lv = 0
     gro_tot = 0
     nb_lv = 0
@@ -54,7 +55,7 @@ def faire_factures(requete:str, mois:int, annee:int, bd:MySQL):
             prix = str(ligne["Prix"])
         if save == '':
             cpt_cmd += 1
-
+            fact += 1
             res += "Factures du " + str(mois) + '/' + str(annee) + '\n' + 'Edition des factures du magasin ' + ligne["nommag"] + '\n' + '-' * 80 
             res += '\n' + ligne["prenomCli"] + ' ' + ligne["nomCli"] + '\n' + ligne["adressecli"] + '\n' + str(ligne["codepostal"]) + ' ' + ligne['Ville'] + '\n' + ' '*26 + 'commande n°' + str(ligne['Numero De Commande']) + ' du ' + str(ligne['Date de Commande']) + '\n' + ' '*8 + 'ISBN' + ' '*24 + 'Titre' + ' '*19 + 'qte' + ' '*3 + 'prix' + ' '*4 + 'total' + '\n'
             res += '  ' + str(cpt_cmd) + ' ' + ligne["ISBN"] + ' ' + titre + ' '*(44-len(titre)) + str(ligne['qte']) + ' '*(7-len(prix)) + prix + ' '*(9-len(str(ligne["Total"]))) + str(ligne["Total"]) + '\n'
@@ -75,6 +76,7 @@ def faire_factures(requete:str, mois:int, annee:int, bd:MySQL):
         elif ligne["nommag"] == save["nommag"]:
             cpt_cmd = 0
             cpt_cmd += 1 
+            fact += 1
             res += ' '*71 + '-'*8 + '\n' + ' '*65 + 'Total' + ' '*(9-len(str(pt_tot))) + str(pt_tot) + '\n' + '-'*80
             res += '\n' + ligne["prenomCli"] + ' ' + ligne["nomCli"] + '\n' + ligne["adressecli"] + '\n' + str(ligne["codepostal"]) + ' ' + ligne['Ville'] + '\n' + ' '*26 + 'commande n°' + str(ligne['Numero De Commande']) + ' du ' + str(ligne['Date de Commande']) + '\n' + ' '*8 + 'ISBN' + ' '*24 + 'Titre' + ' '*19 + 'qte' + ' '*3 + 'prix' + ' '*4 + 'total' + '\n'
             res += '  ' + str(cpt_cmd) + ' ' + ligne["ISBN"] + ' ' + titre + ' '*(44-len(titre)) + str(ligne['qte']) + ' '*(7-len(prix)) + prix + ' '*(9-len(str(ligne["Total"]))) + str(ligne["Total"]) + '\n'
@@ -88,11 +90,11 @@ def faire_factures(requete:str, mois:int, annee:int, bd:MySQL):
             cpt_cmd = 0
             cpt_cmd += 1
             res += ' '*71 + '-'*8 + '\n' + ' '*65 + 'Total' + ' '*(9-len(str(pt_tot))) + str(pt_tot) + '\n' + '-'*80
-            res += '\n' + str(cpt_cmd) +' factures éditées' + '\n' + str(qte_lv) + ' livres vendus' + '\n' + '*'*80
+            res += '\n' + str(fact) +' factures éditées' + '\n' + str(qte_lv) + ' livres vendus' + '\n' + '*'*80
             
             nb_lv += qte_lv
             gro_tot += pt_tot  
-
+            fact = 1
             res +=  '\n' + '\n' + "Factures du " + '...' + '\n' + 'Edition des factures du magasin ' + ligne["nommag"] + '\n' + '-' * 80 
             res += '\n' + ligne["prenomCli"] + ' ' + ligne["nomCli"] + '\n' + ligne["adressecli"] + '\n' + str(ligne["codepostal"]) + ' ' + ligne['Ville'] + '\n' + ' '*26 + 'commande n°' + str(ligne['Numero De Commande']) + ' du ' + str(ligne['Date de Commande']) + '\n' + ' '*8 + 'ISBN' + ' '*24 + 'Titre' + ' '*19 + 'qte' + ' '*3 + 'prix' + ' '*4 + 'total' + '\n'
             res += '  ' + str(cpt_cmd) + ' ' + ligne["ISBN"] + ' ' + titre + ' '*(44-len(titre)) + str(ligne['qte']) + ' '*(7-len(prix)) + prix + ' '*(9-len(str(ligne["Total"]))) + str(ligne["Total"]) + '\n'
@@ -103,7 +105,7 @@ def faire_factures(requete:str, mois:int, annee:int, bd:MySQL):
     res += ' '*71 + '-'*8 + '\n' + ' '*65 + 'Total' + ' '*(9-len(str(pt_tot))) + str(pt_tot) + '\n' + '-'*80
     nb_lv += qte_lv
     gro_tot += pt_tot  
-    res += '\n' + str(cpt_cmd) +' factures éditées' + '\n' + str(qte_lv) + ' livres vendus' + '\n'       
+    res += '\n' + str(fact) +' factures éditées' + '\n' + str(qte_lv) + ' livres vendus' + '\n'       
     res += '*'*80 + '\n' + 'Chiffre d’affaire global: ' + str(gro_tot) + '\n' + 'Nombre livres vendus ' + str(nb_lv)
 
     #ici fin du traitement

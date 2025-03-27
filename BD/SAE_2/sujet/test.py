@@ -99,6 +99,5 @@ def faire_factures(mois:int, annee:int):
 
     #ici fin du traitement
     # fermeture de la requête
-    print(res)
     return res
 faire_factures(2, 2020)

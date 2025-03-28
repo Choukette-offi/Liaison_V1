@@ -45,20 +45,16 @@ def faire_factures(mois:int, annee:int):
             prix = str(ligne["Prix"])
         if save == '':
             cpt_cmd += 1
-
             res += "Factures du " + str(mois) + '/' + str(annee) + '\n' + 'Edition des factures du magasin ' + ligne["nommag"] + '\n' + '-' * 80 
             res += '\n' + ligne["prenomCli"] + ' ' + ligne["nomCli"] + '\n' + ligne["adressecli"] + '\n' + str(ligne["codepostal"]) + ' ' + ligne['Ville'] + '\n' + ' '*26 + 'commande n°' + str(ligne['Numero De Commande']) + ' du ' + str(ligne['Date de Commande']) + '\n' + ' '*8 + 'ISBN' + ' '*24 + 'Titre' + ' '*19 + 'qte' + ' '*3 + 'prix' + ' '*4 + 'total' + '\n'
             res += '  ' + str(cpt_cmd) + ' ' + ligne["ISBN"] + ' ' + titre + ' '*(44-len(titre)) + str(ligne['qte']) + ' '*(7-len(prix)) + prix + ' '*(9-len(str(ligne["Total"]))) + str(ligne["Total"]) + '\n'
-            
             qte_lv += ligne["qte"]
-            pt_tot += ligne["Total"]
             save = ligne
+            pt_tot += ligne["Total"]
 
         elif ligne["prenomCli"] + ligne["nomCli"] == save["prenomCli"] + save["nomCli"] and ligne["nommag"] == save["nommag"] :
             cpt_cmd += 1
-            
             res += '  ' + str(cpt_cmd) + ' ' + ligne["ISBN"] + ' ' + titre + ' '*(44-len(titre)) + str(ligne['qte']) + ' '*(7-len(prix)) + prix + ' '*(9-len(str(ligne["Total"]))) + str(ligne["Total"]) + '\n'
-            
             qte_lv += ligne["qte"]
             pt_tot += ligne["Total"]
             save = ligne
@@ -68,33 +64,24 @@ def faire_factures(mois:int, annee:int):
             cpt_cmd += 1 
             res += ' '*71 + '-'*8 + '\n' + ' '*65 + 'Total' + ' '*(9-len(str(pt_tot))) + str(pt_tot) + '\n' + '-'*80
             res += '\n' + ligne["prenomCli"] + ' ' + ligne["nomCli"] + '\n' + ligne["adressecli"] + '\n' + str(ligne["codepostal"]) + ' ' + ligne['Ville'] + '\n' + ' '*26 + 'commande n°' + str(ligne['Numero De Commande']) + ' du ' + str(ligne['Date de Commande']) + '\n' + ' '*8 + 'ISBN' + ' '*24 + 'Titre' + ' '*19 + 'qte' + ' '*3 + 'prix' + ' '*4 + 'total' + '\n'
-            res += '  ' + str(cpt_cmd) + ' ' + ligne["ISBN"] + ' ' + titre + ' '*(44-len(titre)) + str(ligne['qte']) + ' '*(7-len(prix)) + prix + ' '*(9-len(str(ligne["Total"]))) + str(ligne["Total"]) + '\n'
+            res += '  ' + str(cpt_cmd) + ' ' + ligne["ISBN"] + ' ' + titre +' '*(44-len(titre)) + str(ligne['qte']) + ' '*(7-len(prix)) + prix + ' '*(9-len(str(ligne["Total"]))) + str(ligne["Total"]) + '\n'
             qte_lv += ligne["qte"]
             save = ligne
-            gro_tot += pt_tot
-            pt_tot = ligne["Total"]
-            save = ligne
+            pt_tot += ligne["Total"]
         
         elif ligne["nommag"] != save["nommag"]:
             cpt_cmd = 0
             cpt_cmd += 1
             res += ' '*71 + '-'*8 + '\n' + ' '*65 + 'Total' + ' '*(9-len(str(pt_tot))) + str(pt_tot) + '\n' + '-'*80
             res += '\n' + str(cpt_cmd) +' factures éditées' + '\n' + str(qte_lv) + ' livres vendus' + '\n' + '*'*80
-            
-            nb_lv += qte_lv
-            gro_tot += pt_tot  
-
+            gro_tot += pt_tot
+            nb_lv += qte_lv 
+            qte_lv = ligne["qte"]
+            save = ligne
+            pt_tot = ligne["Total"]
             res +=  '\n' + '\n' + "Factures du " + '...' + '\n' + 'Edition des factures du magasin ' + ligne["nommag"] + '\n' + '-' * 80 
             res += '\n' + ligne["prenomCli"] + ' ' + ligne["nomCli"] + '\n' + ligne["adressecli"] + '\n' + str(ligne["codepostal"]) + ' ' + ligne['Ville'] + '\n' + ' '*26 + 'commande n°' + str(ligne['Numero De Commande']) + ' du ' + str(ligne['Date de Commande']) + '\n' + ' '*8 + 'ISBN' + ' '*24 + 'Titre' + ' '*19 + 'qte' + ' '*3 + 'prix' + ' '*4 + 'total' + '\n'
-            res += '  ' + str(cpt_cmd) + ' ' + ligne["ISBN"] + ' ' + titre + ' '*(44-len(titre)) + str(ligne['qte']) + ' '*(7-len(prix)) + prix + ' '*(9-len(str(ligne["Total"]))) + str(ligne["Total"]) + '\n'
-
-            qte_lv = ligne["qte"]
-            pt_tot = ligne["Total"]  
-            save = ligne
-    res += ' '*71 + '-'*8 + '\n' + ' '*65 + 'Total' + ' '*(9-len(str(pt_tot))) + str(pt_tot) + '\n' + '-'*80
-    nb_lv += qte_lv
-    gro_tot += pt_tot  
-    res += '\n' + str(cpt_cmd) +' factures éditées' + '\n' + str(qte_lv) + ' livres vendus' + '\n'       
+            res += '  ' + str(cpt_cmd) + ' ' + ligne["ISBN"] + ' ' + titre + ' '*(44-len(ligne["Titre"])) + str(ligne['qte']) + ' '*(7-len(prix)) + prix + ' '*(9-len(str(ligne["Total"]))) + str(ligne["Total"]) + '\n'
     res += '*'*80 + '\n' + 'Chiffre d’affaire global: ' + str(gro_tot) + '\n' + 'Nombre livres vendus ' + str(nb_lv)
 
     #ici fin du traitement

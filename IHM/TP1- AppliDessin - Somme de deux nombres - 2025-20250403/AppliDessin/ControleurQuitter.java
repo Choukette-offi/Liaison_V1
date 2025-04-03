@@ -11,5 +11,6 @@ public class ControleurQuitter implements EventHandler<ActionEvent>{
     
     public void handle(ActionEvent e){
         System.out.println("Quitter");
+        this.appli.quitter();
     }
 }

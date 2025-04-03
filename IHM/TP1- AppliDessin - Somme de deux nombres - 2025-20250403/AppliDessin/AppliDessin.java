@@ -34,7 +34,7 @@ public class AppliDessin extends Application {
     public void init(){
         // cette méthode est utilisée pour initialiser les éléments 
         // non graphiques et événtuellement graphiques autres que la Scène et le Stage
-        this.slider = new Slider(5, 50, 20);
+        this.slider = new Slider(1, 50, 30);
         this.boite = new Group();
         this.nombreDeDisques = 0;
     }    
@@ -168,5 +168,14 @@ public class AppliDessin extends Application {
         }
         BorderPane.setMargin(gridpane, new Insets(20));
         border.setLeft(gridpane);
+    }
+
+    public void changeCouleur(){
+        Circle c = (Circle) this.boite.getChildren().get(this.boite.getChildren().size()-1);
+        c.setFill(new Color(Math.random(), Math.random(), Math.random(), 1.0));
+    }
+
+    public void augmenteSlider(int valeur){
+        this.slider.setValues(this.slider.getValue()+valeur);
     }
 }

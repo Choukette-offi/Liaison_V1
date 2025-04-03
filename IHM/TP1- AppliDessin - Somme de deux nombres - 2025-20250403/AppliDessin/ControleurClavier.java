@@ -11,7 +11,18 @@ public class ControleurClavier implements EventHandler<KeyEvent>{
     
     public void handle(KeyEvent e){       
         if (e.getCode().equals(KeyCode.ADD)){
+            this.appli.augmenteLeDernierCercle();
             System.out.println("+");
+        }
+        else if (e.getCode().equals(KeyCode.SUBTRACT)){
+            this.appli.diminueLeDernierCercle();
+            
+            System.out.println("-");
+        }
+
+        else if(e.getCode().equals(KeyCode.MULTIPLY)){
+            this.appli.changeCouleur();
+            System.out.println("*");
         }
     }
 }

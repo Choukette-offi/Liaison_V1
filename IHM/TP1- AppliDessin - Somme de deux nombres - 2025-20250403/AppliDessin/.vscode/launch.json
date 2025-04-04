@@ -14,9 +14,9 @@
             "type": "java",
             "name": "Current File",
             "request": "launch",
+            "vmArgs": "--module-path C:/Program Files/JavaFX/javafx-sdk-24/lib/ --add modules javafx.controls",
             "mainClass": "AppliDessin",
             "projectName": "AppliDessin_29ff60d0",
-            "vmArgs": "--module-path C:/Program Files/JavaFX/javafx-sdk-24/lib/ --add modules javafx.controls",
         }
     ]
 }

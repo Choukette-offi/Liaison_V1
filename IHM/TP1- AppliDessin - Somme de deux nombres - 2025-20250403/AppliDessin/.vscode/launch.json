@@ -15,8 +15,10 @@
             "type": "java",
             "name": "Executable",
             "request": "launch",
+            "vmArgs": "--module-path /usr/share/openjfx/lib/ --add-modules javafx.controls",
             "mainClass": "Executable",
-            "projectName": "AppliDessin_29ff60d0"
+            "projectName": "AppliDessin_29ff60d0",
+            
         }
     ]
 }

@@ -9,6 +9,7 @@ public class ControleurAdditionner implements EventHandler<ActionEvent>{
     }
     
     public void handle(ActionEvent e){
+        this.appli.additionne();
         System.out.println("Addition");
     }
 }

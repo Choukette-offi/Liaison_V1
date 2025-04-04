@@ -50,7 +50,8 @@ public class AppliSomme extends Application {
         pane.getChildren().addAll(boutonA, boutonR, boutonQ);
         pane.setAlignment(Pos.CENTER);  
         boutonA.setOnAction(new ControleurAdditionner(this));
-        boutonQ.setOnAction(new ControleurQuitter(this));       
+        boutonQ.setOnAction(new ControleurQuitter(this));
+        boutonR.setOnAction(new ControleurReset(this));       
         return pane;
     }
 
@@ -77,7 +78,9 @@ public class AppliSomme extends Application {
      * en y mettant une chaine de caractère vide
      */
     public void efface(){
-        // A FAIRE
+        this.tf1.setText("");
+        this.tf2.setText("");
+        this.resultat.setText(""); 
     }
 
     public void quitte(){
@@ -88,7 +91,14 @@ public class AppliSomme extends Application {
      * Cette méthode met à jour le label résultat avec la somme des
      * deux nombres qu'on peut récupérer dans les deux textfields
      */
-    public void additionne(){
-        this.resultat.setText("A FAIRE");
+    public void additionne() {
+        try {
+            Integer val1 = Integer.parseInt(this.tf1.getText());
+            Integer val2 = Integer.parseInt(this.tf2.getText());
+            this.resultat.setText(String.valueOf(val1 + val2));
+        } catch (NumberFormatException e) {
+            // Affichage d'un message d'erreur si la conversion échoue
+            this.resultat.setText("Entrée invalide");
+        }
     }
 }

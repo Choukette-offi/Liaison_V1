@@ -176,6 +176,6 @@ public class AppliDessin extends Application {
     }
 
     public void augmenteSlider(int valeur){
-        this.slider.setValues(this.slider.getValue()+valeur);
+        this.slider.setValue(this.slider.getValue()+valeur);
     }
 }

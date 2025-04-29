@@ -44,6 +44,52 @@ public class Executable {
 	graphex1.addEdge("b", "c");
 	return graphex1;
 	}
+
+	public static String getString(Graph<String, DefaultEdge> graph){
+        if (graph == null) {
+            return "Graph is null";
+        }
+        
+        String listeNoeud = "";
+        String listeArrete = "";
+        
+        for (String noeud : graph.vertexSet()) {
+            listeNoeud += noeud + ", ";
+        }
+
+        for (DefaultEdge edge : graph.edgeSet()) {
+            String source = graph.getEdgeSource(edge);
+            String target = graph.getEdgeTarget(edge);
+            listeArrete += source + "--" + target + ", ";
+        }
+        
+        if (!listeNoeud.isEmpty()) {
+            listeNoeud = listeNoeud.substring(0, listeNoeud.length() - 2);
+        }
+        if (!listeArrete.isEmpty()) {
+            listeArrete = listeArrete.substring(0, listeArrete.length() - 2);
+        }
+        
+        return "{" + listeNoeud + "}, {" + listeArrete + "}";
+    }
+
+	public int getDegreMax(Graph<String, DefaultEdge> graph){
+		if (graph == null) {
+            return "degres max de 0";
+        }
+
+		int degreMax = 0;
+
+        for (String noeud : graph.vertexSet()) {
+            int degre = graph.degreeOf(noeud);
+            if (degre > degreMax) {
+                degreMax = degre;
+            }
+        }
+
+        return degreMax;
+	}
+	
 	public static void main(String[] args) throws IOException {
 		Graph<String, DefaultEdge> graph;
 		/*

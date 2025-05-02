@@ -26,7 +26,7 @@ class Bibliotheque{
         return newB;
     }
     
-    static  boolean exactementMemesValeurs(List<Integer> liste1, List<Integer> liste2){
+    static boolean exactementMemesValeurs(List<Integer> liste1, List<Integer> liste2){
         List<Integer> tmp1 = new ArrayList<>(liste1);
         List<Integer> tmp2 = new ArrayList<>(liste2);
         Collections.sort(tmp1);
@@ -34,21 +34,23 @@ class Bibliotheque{
         if(tmp1.size() != tmp2.size()){
             return false;
         }
-        if(tmp1.size() > tmp2.size()){
-            for(int i = 0; i < tmp1.size(); i++){
-                if(tmp1.get(i) == tmp2.get(i)){
-                    return false;
-                }
+        for(int i = 0; i < tmp1.size(); i++){
+            if(tmp1.get(i) != tmp2.get(i)){
+                return false;
             }
         }
-        else{
-            for(int i = 0; i > tmp1.size(); i++){
-                if(tmp1.get(i) == tmp2.get(i)){
-                    return false;  
-                }
-            }
-        } 
         return true;  
+    }
+
+    static Integer mediane(List<Integer> liste){
+        List<Integer> tmp1 = new ArrayList<>(liste);
+        Collections.sort(tmp1);
+        if(tmp1.size()%2 == 0){
+            return tmp1.get(tmp1.size()/2+1);
+        }
+        else{
+            return tmp1.get(tmp1.size()/2);
+        }
     }
 }
 

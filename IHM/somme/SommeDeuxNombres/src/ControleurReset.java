@@ -1,14 +1,14 @@
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
-public class ControleurAdditionner implements EventHandler<ActionEvent>{
+public class ControleurReset implements EventHandler<ActionEvent>{
     private AppliSomme appli;
     
-    public ControleurAdditionner(AppliSomme appli){
+    public ControleurReset(AppliSomme appli){
         this.appli = appli;
     }
     
     public void handle(ActionEvent e){
-        System.out.println("Addition");
+        this.appli.efface();
     }
 }

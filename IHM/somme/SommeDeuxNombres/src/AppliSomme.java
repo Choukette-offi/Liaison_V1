@@ -6,11 +6,15 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
+import javafx.scene.control.Toggle;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.ToggleGroup;
 
 
 
@@ -44,13 +48,25 @@ public class AppliSomme extends Application {
 
     private HBox hbox(){
         HBox pane =new HBox(50);
-        Button boutonA =new Button("Additionner");
-        Button boutonR =new Button("Reset");        
-        Button boutonQ =new Button("Quitter");
-        pane.getChildren().addAll(boutonA, boutonR, boutonQ);
-        pane.setAlignment(Pos.CENTER);  
-        boutonA.setOnAction(new ControleurAdditionner(this));
-        boutonQ.setOnAction(new ControleurQuitter(this));       
+        RadioButton boutonA =new RadioButton("+");
+        RadioButton boutonS =new RadioButton("-");
+        RadioButton boutonM =new RadioButton("*");
+        RadioButton boutonD =new RadioButton("/");
+        Button boutonR =new Button("R");        
+        Button boutonQ =new Button("Q");
+        pane.getChildren().addAll(boutonA,boutonS, boutonM, boutonD, boutonR, boutonQ);
+        pane.setAlignment(Pos.CENTER);
+        ToggleGroup group = new ToggleGroup();
+        boutonA.setToggleGroup(group);
+        boutonS.setToggleGroup(group);
+        boutonM.setToggleGroup(group);
+        boutonD.setToggleGroup(group);
+        boutonA.setOnAction(new ControleurOperation(this));
+        boutonS.setOnAction(new ControleurOperation(this));
+        boutonM.setOnAction(new ControleurOperation(this));
+        boutonD.setOnAction(new ControleurOperation(this));
+        boutonQ.setOnAction(new ControleurQuitter(this));
+        boutonR.setOnAction(new ControleurReset(this));       
         return pane;
     }
 
@@ -77,11 +93,25 @@ public class AppliSomme extends Application {
      * en y mettant une chaine de caractère vide
      */
     public void efface(){
-        // A FAIRE
+        this.tf1.setText("");
+        this.tf2.setText("");
+        this.resultat.setText("");
     }
 
     public void quitte(){
         Platform.exit();
+    }
+
+    public void soustrait(){
+        this.resultat.setText(String.valueOf(Integer.parseInt(this.tf1.getText()) - Integer.parseInt(this.tf2.getText())));
+    }
+
+    public void multiplie(){
+        this.resultat.setText(String.valueOf(Integer.parseInt(this.tf1.getText()) * Integer.parseInt(this.tf2.getText())));
+    }
+
+    public void divise(){
+        this.resultat.setText(String.valueOf(Integer.parseInt(this.tf1.getText()) / Integer.parseInt(this.tf2.getText())));
     }
 
     /**
@@ -89,6 +119,6 @@ public class AppliSomme extends Application {
      * deux nombres qu'on peut récupérer dans les deux textfields
      */
     public void additionne(){
-        this.resultat.setText("A FAIRE");
+        this.resultat.setText(String.valueOf(Integer.parseInt(this.tf1.getText()) + Integer.parseInt(this.tf2.getText())));
     }
 }

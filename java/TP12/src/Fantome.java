@@ -1,4 +1,4 @@
-public class Fantome {
+public class Fantome implements Comparable<Fantome> {
     private String nom;
     private int force;
     private int taille;
@@ -8,7 +8,7 @@ public class Fantome {
         this.force = force;
         this.taille = taille;
     }
-    
+
     public String getNom() {
         return nom;
     }
@@ -27,6 +27,18 @@ public class Fantome {
     public void setTaille(int taille) {
         this.taille = taille;
     }
+    @Override
+    public int compareTo(Fantome f1){
+        if(f1.getTaille() > this.taille){
+            return -1;
+        }
+        else if(f1.getTaille() < this.taille){
+            return 1;
+        }
+        else{
+            return 0;
+        }
 
+    }
 
 }

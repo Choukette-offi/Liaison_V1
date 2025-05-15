@@ -7,6 +7,7 @@ import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.builder.GraphTypeBuilder;
 import org.jgrapht.util.SupplierUtil;
+i
 
 /**
  * Hello JGraphT!
@@ -55,7 +56,50 @@ public class App {
         return neighbors;
     }
 
-	public static List<String> 
-	
+	public static Graph<String, DefaultEdge> sousGrapheInduitParSommets(Graph<String, DefaultEdge> g, List<String> s) {
+		Graph<String, DefaultEdge> sousGraphe = new SimpleGraph<>(DefaultEdge.class);
+		for(String sommet : s){
+			sousGraphe.addVertex(sommet);
+		}
+
+		for(String u : s){
+			for(String v : s){
+				if(!u.equals(v) && g.containsEdge(u, v)){
+					sousGraphe.addEdge(u, v);
+				}
+			}
+		}
+		return sousGraphe;
+	}
+
+	public static Graph<String, DefaultEdge> supprimerAretes(Graph<String, DefaultEdge> g, List<String> s) {
+		Graph<String, DefaultEdge> Graphe = new SimpleGraph<>(DefaultEdge.class);
+
+		for(String sommet : G.vertexSet()){
+			Graphe.addVertex(sommet);
+		}
+
+		for (DefaultEdge arete : s){
+			String source = g.getEdgeSource(arete);
+			String target = G.getEdgeTarget(arete);
+			DefaultEdge edgeToRemove = Graphe.getEdge(source, target);
+			if(edgeToRemove != null){
+				Graphe.edgeToRemove(edgeToRemove);
+			}
+		}
+		return Graphe;
+	}
+
+	public static boolean chaineElementaire(List<String> s){
+		List<String> verif = new ArrayList<>();
+		for(String sommet : s){
+			if(sommet.contains(s)){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public static List<String> extraireChaineElementaire()
 }
 

@@ -21,9 +21,19 @@ public class JoueurBD {
 		return res;
 	}
 
-
 	int insererJoueur( Joueur j) throws  SQLException{
-		throw new SQLException("méthode insererJoueur à implémenter");
+		this.st = laConnexion.createStatement();
+		int nwJ = st.executeUpdate("Insert into JOUEUR(pseudo, motdepasse, niveau, main, abonne) values("
+			+ j.getPseudo() + ","
+			+ j.getMotdepasse() + ","
+			+ j.getNiveau() + ","
+			+ j.getMain() + ","
+			+ j.isAbonne() + 
+		");");
+		if(nwJ == 0){
+			throw new SQLException("Insertion non valide");
+		}
+		return nwJ;
 	}
 
 

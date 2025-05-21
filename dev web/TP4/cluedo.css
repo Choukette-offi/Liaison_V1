@@ -1,0 +1,37 @@
+/* A COMPLETER */
+.detournee{
+    text-decoration: underline;
+}
+
+.contandante{
+    font-weight: bold;
+}
+
+h1 ,section>h2,h3{
+    color: red;
+}
+
+aside ul ul{
+    list-style-type: none;
+}
+
+#armes ul{
+    color: green;
+}
+
+#annexes ul ul{
+    color: blue;
+}
+
+article img{
+    height: 1rem;
+    
+}
+
+aside img{
+    width: 20vw;
+}
+
+#annexes section:last-child li{
+    list-style-type: none;
+}

@@ -1,8 +1,0 @@
-1 c'est grace a la ligne plublic static void(String [] args){
-}
-2
-Attribut = premier, second
-Constructeur = Couple(x,y) et Couple()
-Méthode = setPremier(int premier), permuter(), somme(), toString()
-3
-(1) (5, 4) (2) 1 (3) (0,7)

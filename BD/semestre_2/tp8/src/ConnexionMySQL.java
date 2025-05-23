@@ -8,7 +8,7 @@ public class ConnexionMySQL {
 	}
 
 	public void connecter(String nomServeur, String nomBase, String nomLogin, String motDePasse) throws SQLException {
-		this.mysql = DriverManager.getConnection("jdbc:mysql://"+nomServeur+":3306/"+ "DBmoisan","moisan" ,"moisan");
+		this.mysql = DriverManager.getConnection("jdbc:mariadb://"+nomServeur+":3306/"+ "DBmoisan","moisan" ,"moisan");
 		// si tout s'est bien passé la connexion n'est plus nulle
 		this.connecte=this.mysql !=null;
 	}

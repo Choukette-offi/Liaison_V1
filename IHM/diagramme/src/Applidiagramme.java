@@ -44,7 +44,7 @@ public class Applidiagramme extends Application{
         pane.setStyle("-fx-background-color:rgb(59, 103, 161);");
         Label txt1 = new Label("Allo 45 -Module Analyste");
         txt1.setStyle("-fx-font-size: 24px;");
-        Button boutonDeco = new Button("Deconnexion");
+        Button boutonDeco = new Button();
         boutonDeco.setGraphic("../graphics/user.png");
         pane.setLeft(txt1);
         pane.setRight(boutonDeco);

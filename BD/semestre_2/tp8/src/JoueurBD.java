@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.AbstractMap;
 import java.util.Map;
 
+import javax.swing.text.StyledEditorKit.BoldAction;
+
 public class JoueurBD {
 	ConnexionMySQL laConnexion;
 	Statement st;
@@ -21,24 +23,21 @@ public class JoueurBD {
 		return res;
 	}
 
-	int insererJoueur( Joueur j) throws  SQLException{
+	int insererJoueur(Joueur j) throws  SQLException{
 		this.st = laConnexion.createStatement();
-		int nwJ = st.executeUpdate("Insert into JOUEUR(pseudo, motdepasse, niveau, main, abonne) values("
-			+ j.getPseudo() + ","
-			+ j.getMotdepasse() + ","
-			+ j.getNiveau() + ","
-			+ j.getMain() + ","
-			+ j.isAbonne() + 
-		");");
-		if(nwJ == 0){
-			throw new SQLException("Insertion non valide");
-		}
-		return nwJ;
+		int numJoueur = maxNumJoueur() + 1;
+
+		char lettre = 'N';
+		if(j.isAbonne()) lettre = 'O';
+		st.executeQuery("Insert into JOUEUR values("+  numJoueur+ ",'" + j.getPseudo() + "','"+ j.getMotdepasse() + "','"+ lettre + "','"+ j.getMain() + "',"+  j.getNiveau()+")");
+		return maxNumJoueur();
 	}
 
 
 	void effacerJoueur(int num) throws SQLException {
-		throw new SQLException("méthode effacerJoueur à implémenter");
+		this.st = laConnexion.createStatement();
+		st.executeQuery("delete from MESSAGE where idUt1 =" + num +"or idUt2 = " + num);
+		st.executeQuery("delete from JOUEUR where numJoueur =" + num);
 	}
 
     void majJoueur(Joueur j)throws SQLException{
@@ -46,8 +45,25 @@ public class JoueurBD {
     }
 
     Joueur rechercherJoueurParNum(int num)throws SQLException{
+		this.st = laConnexion.createStatement();
+		ResultSet rs = st.executeQuery("Select * from JOUEUR where numJoueur = " + num);
+		Joueur j = null;
+		Boolean abonne = false;
+		while(rs.next()){
+			String pseudo = rs.getString("pseudo");
+			String motdepasse = rs.getString("motdepasse");
+			char main = rs.getString("main").charAt(0);
+			int niveau = rs.getInt("niveau");
+			if(rs.getString("abonne").equals("O")) abonne = true;
+			j = new Joueur(num, pseudo, motdepasse, abonne , main, niveau);
+		}
     	throw new SQLException("méthode rechercherJoueurParNum à implémenter");
-    }
+		return j;
+	}
+
+	Joueur rechercherJoueurParPseudo(String pseudo)throws SQLException{
+	}
+    
 
 	ArrayList<Joueur> listeDesJoueurs() throws SQLException{
 		throw new SQLException("méthode listeDesJoueurs à implémenter");

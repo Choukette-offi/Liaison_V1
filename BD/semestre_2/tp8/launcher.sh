@@ -3,8 +3,8 @@
 
 
 #on compile les fichiers .java
-javac -d bin --module-path /usr/share/openjfx/lib/ --add-modules javafx.controls ./src/*.java
+javac --source-path ./src -d ./bin --module-path /usr/share/openjfx/lib/ --add-modules javafx.controls src/TestJDBC.java
 
 
 #on lance l'application
-java -cp bin:img --module-path /usr/share/openjfx/lib/ --add-modules javafx.controls TestJDBC
+java -cp ./bin:/usr/share/java/mariadb-java-client.jar --module-path /usr/share/openjfx/lib/ --add-modules javafx.controls TestJDBC
